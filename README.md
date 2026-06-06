@@ -1,80 +1,69 @@
-markdown# Excel Functions Assignment - README
+# Excel Functions Assignment - README
 
-This project demonstrates the use of core Excel functions for data analysis and text manipulation. The assignment covers mathematical, statistical, logical, and text functions applied to a sample dataset.
+## **Overview**
+This assignment demonstrates core Excel functions for data analysis and text manipulation using a product inventory dataset with 34 items across multiple categories and regions.
 
-## **Objective**
-To understand and implement the following Excel functions:
-**SUM, MIN, MAX, COUNT, AVERAGE, AVERAGEIF, SUMIF, COUNTIF, IF, RIGHT, UPPER, LOWER**
+## **Dataset Structure**
+| Column A | Column B | Column C | Column D | Column E | Column F |
+| --- | --- | --- | --- |
+| Product ID | Product Name | Brand Name | Price ($) | Quantity | Category |
 
-## **File Structure**
-- **Sheet Name**: `Data`
-- **Sample Columns**: `Student Name`, `Department`, `Score`, `Region`
-- **Formula Columns**: `SUM`, `MIN`, `MAX`, `COUNT`, `AVERAGE`, `AVERAGEIF`, `SUMIF`, `COUNTIF`, `IF`, `RIGHT`, `UPPER`, `LOWER`
+Data range: `A1:F35` with headers in row 1.
 
-## **Function Explanations & Usage**
+## **Function Implementation**
 
-1. **SUM**  
-   Adds all numeric values in a selected range.  
-   *Example*: `=SUM(C2:C20)` → Total of all scores.
+### **1. Mathematical & Statistical Functions**
+Applied on `Price ($)` column D2:D35:
 
-2. **MIN**  
-   Returns the smallest numeric value in a range.  
-   *Example*: `=MIN(C2:C20)` → Lowest score.
+| Function | Formula | Result | Purpose |
+| --- | --- | --- | --- |
+| SUM | `=SUM(D2:D35)` | $11,490 | Total inventory value |
+| COUNT | `=COUNT(D2:D35)` | 34 | Count of products with price |
+| AVERAGE | `=AVERAGE(D2:D35)` | $337.94 | Average product price |
+| MIN | `=MIN(D2:D35)` | $30 | Lowest priced product |
+| MAX | `=MAX(D2:D35)` | $1,000 | Highest priced product |
 
-3. **MAX**  
-   Returns the largest numeric value in a range.  
-   *Example*: `=MAX(C2:C20)` → Highest score.
+### **2. Logical Function – IF**
+Added column G: `Price Category`  
+Formula in G2: `=IF(D2>=500,"High Price","Standard Price")`  
+Classifies products as "High Price" if price ≥ $500, else "Standard Price".
 
-4. **COUNT**  
-   Counts the number of cells that contain numbers in a range.  
-   *Example*: `=COUNT(C2:C20)` → Total number of scored entries.
+### **3. Conditional Functions – SUMIF and COUNTIF**
+| Function | Formula | Result | Purpose |
+| --- | --- | --- | --- |
+| SUMIF | `=SUMIF(F2:F35,"Electronics",D2:D35)` | $7,660 | Total price of Electronics category |
+| SUMIF | `=SUMIF(F2:F35,"Kitchen",E2:E35)` | 145 | Total quantity of Kitchen items |
+| COUNTIF | `=COUNTIF(D2:D35,"<100")` | 12 | Count of products under $100 |
+| COUNTIF | `=COUNTIF(F2:F35,"Fashion")` | 7 | Count of Fashion category items |
 
-5. **AVERAGE**  
-   Calculates the arithmetic mean of a range.  
-   *Example*: `=AVERAGE(C2:C20)` → Average score.
+### **4. Text Formatting – LEFT, RIGHT, MID**
+Applied on `Product ID` column A to extract date components:
 
-6. **AVERAGEIF**  
-   Calculates the average of cells that meet a given condition.  
-   *Example*: `=AVERAGEIF(B2:B20,"Sales",C2:C20)` → Average score for Sales department.
+| Function | Formula in H2 | Purpose | Example from A2 |
+| --- | --- | --- | --- |
+| LEFT | `=LEFT(A2,2)` | Extract day | "28" from 28-JAN-US |
+| MID | `=MID(A2,4,3)` | Extract month | "JAN" from 28-JAN-US |
+| RIGHT | `=RIGHT(A2,2)` | Extract country code | "US" from 28-JAN-US |
 
-7. **SUMIF**  
-   Adds cells in a range that meet a given condition.  
-   *Example*: `=SUMIF(B2:B20,"North",C2:C20)` → Total score for North region.
+Add columns H: `Day`, I: `Month`, J: `Country` and drag formulas down to row 35.
 
-8. **COUNTIF**  
-   Counts cells that meet a given condition.  
-   *Example*: `=COUNTIF(B2:B20,"IT")` → Number of entries in IT department.
-
-9. **IF**  
-   Performs a logical test and returns one value if TRUE and another if FALSE.  
-   *Example*: `=IF(C2>=50,"Pass","Fail")` → Checks if a student passed based on score.
-
-10. **RIGHT**  
-    Extracts a specified number of characters from the right side of a text string.  
-    *Example*: `=RIGHT(A2,3)` → Extracts last 3 characters from the student name.
-
-11. **UPPER**  
-    Converts all text to uppercase.  
-    *Example*: `=UPPER(A2)` → Converts student name to uppercase.
-
-12. **LOWER**  
-    Converts all text to lowercase.  
-    *Example*: `=LOWER(A2)` → Converts student name to lowercase.
-
-## **How to Run**
-1. Open the Excel file `Excel_Assignment.xlsx`.
-2. Enter sample data in columns A-D from row 2 onwards.
-3. In columns E-P, apply the respective formulas as shown in the examples above.
-4. Drag the formulas down to apply them to all rows.
+## **How to Replicate**
+1. Open the Excel file with the product table
+2. Insert new columns G-J for `Price Category`, `Day`, `Month`, `Country`
+3. Enter formulas in row 2 as shown above
+4. Drag all formulas down to row 35 to apply to entire dataset
+5. Add summary formulas below the table in D37:D41 for SUM, COUNT, AVERAGE, MIN, MAX
 
 ## **Key Learning Outcomes**
-- Basic arithmetic and statistical analysis using Excel.
-- Conditional calculations with IF and IF-based functions.
-- Text cleaning and formatting using text functions.
+- Aggregate data using SUM, COUNT, AVERAGE, MIN, MAX
+- Apply business logic with IF for price classification
+- Perform conditional analysis using SUMIF and COUNTIF
+- Parse structured text with LEFT, RIGHT, MID functions
 
 ## **Notes**
-- Ensure there are no blank cells in the range when using COUNT, MIN, and MAX for accurate results.
-- Use absolute references `$C$2:$C$20` if you plan to copy formulas across multiple columns.
+- All price values are numeric despite `$` formatting in Excel
+- Product ID format is `DD-MMM-CC` where DD=day, MMM=month, CC=country
+- Use absolute references `$D$2:$D$35` when creating dashboard summaries
 
 ---
-*Created for Excel Assignment | 2026*
+*Excel Assignment | 2026*
